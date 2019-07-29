@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="stu.aewnfin.dao.ReviewDao">
+	
+	<insert id="addReview">
+		INSERT INTO review (user_id,comic_id,`comment`,type) VALUES(#{user_id},#{comic_id},#{comment},#{type})
+	</insert>
+	
+	<select id="findAllReviewForComic">
+		SELECT * FROM review WHERE comic_id = #{comic_id}
+	</select>
+	
+</mapper>

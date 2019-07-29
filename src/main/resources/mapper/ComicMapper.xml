@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="stu.aewnfin.dao.ComicDao">	
+
+	<insert id="addComic">
+		INSERT INTO comic (title,img_uri,`begin`) VALUES(#{title},#{img_uri},NOW())
+	</insert>
+	
+	<select id="searchByTitle" parameterType="String" resultType="stu.aewnfin.entity.Comic">		
+		SELECT * FROM comic where off = false 
+		<if test="_parameter != null">
+			AND title LiKE #{likeWord}
+		</if>
+	</select>
+	
+	<select id="searchTopX" parameterType="map" resultType="stu.aewnfin.entity.Comic">
+		SELECT * FROM comic WHERE off=FALSE
+		<choose>
+			<when test="orderBy == 'length'">ORDER BY `length` desc</when>
+			<otherwise>ORDER BY `update` desc</otherwise>
+		</choose>
+		LIMIT #{X}
+	</select>
+
+	<update id="updateComicLength">
+		UPDATE comic SET length=length+1 WHERE id=#{id}
+	</update>
+	
+	<select id="findById" resultType="stu.aewnfin.entity.Comic">
+		SELECT * FROM comic where id = #{id}
+	</select>
+	
+	<update id="offComic">
+		UPDATE comic SET off = TRUE WHERE id = #{id}
+	</update>
+	
+	<select id="findByTitle" resultType="stu.aewnfin.entity.Comic">
+		SELECT * FROM comic where title = #{title}
+	</select>
+	
+	<select id="allAuthorComic" resultType="stu.aewnfin.entity.Comic">
+	SELECT * FROM comic where id IN(SELECT comic_id FROM publish WHERE author_id = #{author_id})
+	</select>
+	
+	<delete id="deleteWrongComic">
+		DELETE FROM comic WHERE id=#{id}
+	</delete>
+	
+	<!--
+	<select id="searchTitleByLikeWord" parameterType="String" resultType="String">
+		SELECT title FROM comic where off = false
+		<if test="_parameter != null">
+			AND title LiKE #{likeWord}
+		</if>
+		LIMIT 8
+	</select>-->
+	
+</mapper>

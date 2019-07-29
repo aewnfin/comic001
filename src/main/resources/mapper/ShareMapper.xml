@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="stu.aewnfin.dao.ShareDao">
+
+	<select id="getShare" resultType="stu.aewnfin.entity.Share">
+		SELECT * FROM `share` WHERE user_id=#{user_id} AND comic_id = #{comic_id} AND part_num = #{part_num}
+	</select>
+	
+	<insert id="addShare">
+		INSERT INTO `share` (user_id,comic_id,part_num,share_user,pay) VALUES(#{user_id},#{comic_id},#{part_num},#{share_user},#{pay})
+	</insert>
+	
+	<update id="share">
+		UPDATE `share` SET share_user=#{share_user} WHERE user_id=#{user_id} AND comic_id=#{comic_id} AND part_num=#{part_num}
+	</update>
+	
+	<select id="ifShared" resultType="stu.aewnfin.entity.Share">
+		SELECT * FROM `share` WHERE comic_id = #{comic_id} AND part_num = #{part_num} AND share_user = #{share_user}
+	</select>
+
+</mapper>

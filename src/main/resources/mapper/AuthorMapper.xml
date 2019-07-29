@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="stu.aewnfin.dao.AuthorDao">
+
+	<insert id="addAuthor">
+		INSERT INTO author (id,IDcard,firstName,secondName) VALUES
+		(#{id},#{IDcard},#{firstName},#{secondName})
+	</insert>
+
+	<update id="verifyAuthor">
+		UPDATE author SET verify = TRUE WHERE id=#{id}
+	</update>
+
+	<select id="findById" resultType="stu.aewnfin.entity.Author">
+		SELECT * FROM author where id = #{id}
+	</select>
+
+	<select id="AllForVerify" resultType="stu.aewnfin.entity.Author">
+		SELECT * FROM author WHERE verify = 0
+	</select>
+
+	<select id="ifHaveAuthor" resultType="java.lang.Boolean">
+		SELECT COUNT(1) FROM author
+		WHERE id= #{id}
+	</select>
+
+	<update id="reVerifyAuthor">
+		UPDATE author SET IDcard=#{IDcard}
+		,firstName=#{firstName},secondName=#{secondName}, verify = FALSE WHERE
+		id=#{id}
+	</update>
+
+</mapper>

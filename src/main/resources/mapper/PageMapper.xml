@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="stu.aewnfin.dao.PageDao">
+  
+  <select id="getPages" resultType="stu.aewnfin.entity.Page">
+  	SELECT * FROM page WHERE id=#{id} AND part=#{part} ORDER BY num
+  </select>
+  
+  <insert id="addPage">
+  	INSERT INTO page (id,part,num,content) VALUES (#{id},#{part},#{num},#{content})
+  </insert>
+  
+</mapper>

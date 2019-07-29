@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+
+	xsi:schemaLocation="
+
+    http://www.springframework.org/schema/context
+    
+    http://www.springframework.org/schema/context/spring-context.xsd
+
+    http://www.springframework.org/schema/beans
+
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+   
+    http://www.springframework.org/schema/mvc
+    
+    http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+	<!-- 组件扫描 --><!-- 扫描 spring 容器注解添加 bean -->
+	<context:component-scan
+		base-package="stu.aewnfin"></context:component-scan>
+	<!-- 启动注解驱动 --><!-- 扫描 springMVC 注解 添加业务逻辑模型 -->
+	<mvc:annotation-driven />
+	<!-- 配置视图解析器 -->
+
+	<!-- 不对页面缓存 --><!-- 解析顺序-第一 -->
+	<!-- <bean class="org.springframework.web.servlet.view.BeanNameViewResolver"> 
+		<property name="order" value="1" /> </bean> <bean id="test" class="org.springframework.web.servlet.view.InternalResourceView"> 
+		<property name="url" value="/test.jsp" /> </bean> -->
+
+	<!-- 对页面缓存 --><!-- 解析顺序-第二 -->
+	<!-- <bean class="org.springframework.web.servlet.view.XmlViewResolver"> 
+		<property name="location" value="/WEB-INF/views.xml" /> <property name="order" 
+		value="2" /> </bean> -->
+
+	<!-- 对路径缓存 --><!-- 解析顺序-第三 -->
+	<!-- <bean class="org.springframework.web.servlet.view.ResourceBundleViewResolver"> 
+		<property name="basename" value="views"/> <property name="order" value="3"/> 
+		</bean> -->
+
+	<!-- 配置内容协商视图解析器 -->
+	<!-- <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver"> 
+		<property name="mediaTypes"> <map> <entry key="atom" value="application/atom+xml" 
+		/> <entry key="html" value="text/html" /> <entry key="json" value="application/json" 
+		/> </map> </property> <property name="viewResolvers"> <list> -->
+	<!-- <bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/> -->
+	<!-- <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
+		<property name="prefix" value="/WEB-INF/jsp/" /> <property name="suffix" 
+		value=".jsp" /> </bean> </list> </property> <property name="defaultViews"> 
+		<list> <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView" 
+		/> </list> </property> </bean> -->
+
+	<!-- jsp 视图解析器 --><!-- 对页面缓存 --><!-- 解析顺序-最后 -->
+	<bean id="jspViewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/jsp/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+
+	<!-- 文件上传配置 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 上传文件的最大大小 -->
+		<property name="maxUploadSize" value="17367648787"></property>
+		<!-- 上传文件的编码 -->
+		<property name="defaultEncoding" value="UTF-8"></property>
+	</bean>
+	
+	<!-- <mvc:resources mapping="/js/**" location="/js/" />
+	<mvc:resources mapping="/css/**" location="/css/" />
+	<mvc:resources mapping="/images/**" location="/images/" /> -->
+
+</beans>

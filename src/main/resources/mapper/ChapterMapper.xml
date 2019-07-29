@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="stu.aewnfin.dao.ChapterDao">
+  
+  	<select id="getChapterListByComicId" parameterType="Integer" resultType="stu.aewnfin.entity.Chapter">
+  		SELECT * FROM chapter WHERE id = #{comic_id} ORDER BY part ASC
+  	</select>
+  	
+  	<select id="getShare">
+  		SELECT * FROM `share` WHERE user_id=#{user_id} AND comic_id=#{comic_id} AND part_num=#{part_num}
+  		<if test="share_user != null">
+  			AND share_user=#{share_user}
+  		</if>
+  	</select>
+  	
+  	<insert id="addChapter">
+  		INSERT INTO chapter (id,part,title,cost) VALUES (#{id},#{part},#{title},#{cost})
+  	</insert>
+  	  	
+  	<select id="getCost" resultType="stu.aewnfin.entity.Chapter">
+  		SELECT * FROM chapter WHERE id = #{comic_id} AND part = #{part}
+  	</select>
+
+
+  
+</mapper>

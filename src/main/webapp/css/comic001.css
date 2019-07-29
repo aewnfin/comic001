@@ -1,0 +1,26 @@
+body {
+  /*padding-top: 51px*/
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+.navbar-brand > img {
+    /*height: -webkit-fill-available;*/
+}
+
+.cm-label{
+	font-weight: normal;
+}
+
+.cm-navbar{
+	border-radius:0;
+}
+
+.cm-title{
+	display:block;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	overflow:hidden;
+}
+
